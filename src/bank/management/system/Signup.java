@@ -22,8 +22,8 @@ public class Signup extends JFrame implements ActionListener {
 
         addScaledImageIcon("icon/bank.png", 25, 10, 100, 100);
         createLabel("Application Form No." + first, "Raleway", Font.BOLD, 38, 160, 20, 600, 40);
-        createLabel("Page1:", "Raleway", Font.BOLD, 22, 330, 70, 600, 30);
-        createLabel("Personal Details:", "Raleway", Font.BOLD, 22, 290, 90, 600, 30);
+        createLabel("Page1 :-", "Raleway", Font.BOLD, 22, 330, 70, 600, 30);
+        createLabel("Personal Details :-", "Raleway", Font.BOLD, 22, 290, 90, 600, 30);
 
         textName = createTextField("Name :", 100, 150, 400, 30);
         textFname = createTextField("Father's Name :", 100, 200, 400, 30);
@@ -160,7 +160,7 @@ public class Signup extends JFrame implements ActionListener {
                 Con1 con1 = new Con1();
                 String query = "insert into signup values('"+formno+"', '"+name+"', '"+fname+"', '"+dob+"', '"+gender+"', '"+email+"', '"+marital+"', '"+address+"', '"+city+"', '"+pincode+"', '"+state+"')";
                 con1.statement.executeUpdate(query);
-                new Signup2();
+                new Signup2(first);
                 setVisible(false);
             }
 
