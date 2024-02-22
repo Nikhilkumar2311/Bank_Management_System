@@ -11,7 +11,7 @@ import java.util.Random;
 public class Signup extends JFrame implements ActionListener {
     JTextField textName, textFname, textEmail, textAdd, textCity, textPin, textState;
     JButton button;
-    JRadioButton r1, r2, m1, m2, m3;
+    JRadioButton r1, r2, r3, m1, m2;
     JDateChooser dateChooser;
     Random rand = new Random();
     long first4 = (rand.nextLong() % 9000L) + 1000L;
@@ -45,12 +45,19 @@ public class Signup extends JFrame implements ActionListener {
         r2 = new JRadioButton("Female");
         r2.setFont(new Font("Raleway", Font.BOLD, 14));
         r2.setBackground(new Color(222, 255, 228));
-        r2.setBounds(450, 250, 90, 30);
+        r2.setBounds(420, 250, 90, 30);
         add(r2);
+
+        r3 = new JRadioButton("Other");
+        r3.setBounds(550, 250, 150, 30);
+        r3.setBackground(new Color(222, 255, 228));
+        r3.setFont(new Font("Raleway", Font.BOLD, 14));
+        add(r3);
 
         ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(r1);
         buttonGroup.add(r2);
+        buttonGroup.add(r3);
 
         textEmail = createTextField("Email :", 100, 350, 400, 30);
 
@@ -68,16 +75,10 @@ public class Signup extends JFrame implements ActionListener {
         m2.setFont(new Font("Raleway", Font.BOLD, 14));
         add(m2);
 
-        m3 = new JRadioButton("Other");
-        m3.setBounds(635, 400, 100, 30);
-        m3.setBackground(new Color(222, 255, 228));
-        m3.setFont(new Font("Raleway", Font.BOLD, 14));
-        add(m3);
 
         ButtonGroup buttonGroup2 = new ButtonGroup();
         buttonGroup2.add(m1);
         buttonGroup2.add(m2);
-        buttonGroup2.add(m3);
 
         textAdd = createTextField("Address :", 100, 450, 400, 30);
         textCity = createTextField("City :", 100, 500, 400, 30);
@@ -127,7 +128,46 @@ public class Signup extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO
+        String formno = first;
+        String name = textName.getText();
+        String fname = textFname.getText();
+        String dob = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
+        String gender = null;
+        if(r1.isSelected()){
+            gender = "Male";
+        } else if (r2.isSelected()) {
+            gender = "Female";
+        } else if (r3.isSelected()) {
+            gender = "Other";
+        }
+        String email = textEmail.getText();
+        String marital = null;
+        if(m1.isSelected()){
+            marital = "Married";
+        } else if (m2.isSelected()) {
+            marital = "Unmarried";
+        }
+
+        String address = textAdd.getText();
+        String city = textCity.getText();
+        String pincode = textPin.getText();
+        String state = textState.getText();
+
+        try{
+            if(textName.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Fill all the Fields");
+            }else{
+                Con1 con1 = new Con1();
+                String query = "insert into signup values('"+formno+"', '"+name+"', '"+fname+"', '"+dob+"', '"+gender+"', '"+email+"', '"+marital+"', '"+address+"', '"+city+"', '"+pincode+"', '"+state+"')";
+                con1.statement.executeUpdate(query);
+                new Signup2();
+                setVisible(false);
+            }
+
+        } catch (Exception E){
+            E.printStackTrace();
+        }
+
     }
 
     public static void main(String[] args) {
