@@ -8,14 +8,13 @@ import java.awt.event.ActionListener;
 public class Signup2 extends JFrame implements ActionListener {
 
     JTextField textPan, textAadhar;
-    JComboBox comboBox;
     String formno;
 
     JButton button;
 
     JRadioButton r1, r2, e1, e2;
 
-    Signup2(String first){
+    Signup2(String formno){
         super("APPLICATION FORM");
 
 
@@ -23,44 +22,39 @@ public class Signup2 extends JFrame implements ActionListener {
 
         this.formno = formno;
 
-        createLabel("Form No :- " + formno, "Raleway", Font.BOLD, 16, 700, 10, 180, 30);
+
         createLabel("Page2 :-", "Raleway", Font.BOLD, 20, 300, 30, 600, 40);
-        createLabel("Additional Details :-", "Raleway", Font.BOLD, 20, 300, 60, 600, 40);
+        createLabel("Additional Details", "Raleway", Font.BOLD, 20, 300, 60, 600, 40);
 
         createLabel("Religion :", "Raleway", Font.BOLD, 16, 100, 120, 100, 30);
 
         // Dropdown Which contains all the religion
         String[] religion = {"Hindu", "Muslim", "Sikh", "Christian", "Other"};
         JComboBox religionComboBox = createComboBox(religion, 350, 120, 320, 30);
-        add(religionComboBox);
 
 
         createLabel("Category :", "Raleway", Font.BOLD, 16, 100, 170, 100, 30);
 
         String[] category = {"GENERAL", "OBC", "SC", "ST", "Other"};
         JComboBox categoryComboBox = createComboBox(category, 350, 170, 320, 30);
-        add(categoryComboBox);
 
 
         createLabel("Income :", "Raleway", Font.BOLD, 16, 100, 220, 100, 30);
 
         String[] income = {"None", "< 1,50,000", "< 2,50,000", "< 5,00,000", "Upto 10,00,000", "Above 10,00,000"};
         JComboBox incomeComboBox = createComboBox(income, 350, 220, 320, 30);
-        add(incomeComboBox);
 
 
         createLabel("Education :", "Raleway", Font.BOLD, 16, 100, 270, 100, 30);
 
         String[] education = {"Non-Graduate", "Graduate", "Post-Graduate", "Doctrate", "Others"};
         JComboBox educationComboBox = createComboBox(education, 350, 270, 320, 30);
-        add(educationComboBox);
 
 
         createLabel("Occupation :", "Raleway", Font.BOLD, 16, 100, 330, 100, 30);
 
         String[] occupation = {"Salaried", "Self-Employed", "Business", "Student", "Retired", "Other"};
         JComboBox occupationComboBox = createComboBox(occupation, 350, 330, 320, 30);
-        add(occupationComboBox);
 
 
         createLabel("PAN No. :", "Raleway", Font.BOLD, 16, 100, 380, 100, 30);
@@ -110,6 +104,8 @@ public class Signup2 extends JFrame implements ActionListener {
         buttonGroup1.add(e1);
         buttonGroup1.add(e2);
 
+        createLabel("Form No :- " + formno, "Raleway", Font.BOLD, 16, 700, 10, 180, 30);
+
 
         button = new JButton("Next");
         button.setFont(new Font("Raleway", Font.BOLD, 14));
@@ -144,11 +140,12 @@ public class Signup2 extends JFrame implements ActionListener {
         return textField;
     }
 
-    public static JComboBox createComboBox(String[] values, int x, int y, int width, int height) {
+    public JComboBox createComboBox(String[] values, int x, int y, int width, int height) {
         JComboBox comboBox = new JComboBox(values);
         comboBox.setBackground(new Color(236, 232, 232));
         comboBox.setFont(new Font("Raleway", Font.BOLD, 14));
         comboBox.setBounds(x, y, width, height);
+        add(comboBox);
         return comboBox;
     }
 
