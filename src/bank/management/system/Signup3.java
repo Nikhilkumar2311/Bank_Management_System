@@ -4,12 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class Signup3 extends JFrame implements ActionListener {
 
     JRadioButton r1, r2, r3, r4;
     String formno;
-    JButton button1, button2;
+    JButton submit, cancel;
     JCheckBox c1,c2,c3,c4,c5,c6;
     Signup3(String formno){
         super("APPLICATION FORM");
@@ -81,8 +82,8 @@ public class Signup3 extends JFrame implements ActionListener {
 
         createLabel("Form No :- " + formno, "Raleway", Font.BOLD, 16, 700, 10, 180, 30);
 
-        addButton("Submit", 250, 720, 100, 30, 1);
-        addButton("Cancel", 420, 720, 100, 30, 1);
+        addButton("Submit", 220, 630, 100, 30, 1);
+        addButton("Cancel", 390, 630, 100, 30, 2);
 
 
         setLayout(null);
@@ -117,15 +118,15 @@ public class Signup3 extends JFrame implements ActionListener {
         button.setForeground(Color.WHITE);
         button.setBackground(Color.BLACK);
         button.setBounds(x, y, width, height);
-        //button.addActionListener(this);
+        button.addActionListener(this);
         add(button);
 
         switch (buttonNumber) {
             case 1:
-                button1 = button;
+                submit = button;
                 break;
             case 2:
-                button2 = button;
+                cancel = button;
                 break;
             default:
                 throw new IllegalArgumentException("Invalid button number");
@@ -143,6 +144,62 @@ public class Signup3 extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String atype = null;
+        if(r1.isSelected()){
+            atype = "Saving Account";
+        } else if (r2.isSelected()) {
+            atype = "Fixed Saving Account";
+        } else if (r3.isSelected()) {
+            atype = "Current Account";
+        } else if (r4.isSelected()) {
+            atype = "Recurring Deposit Account";
+        }
+
+        Random ran = new Random();
+        long card = (ran.nextLong() % 90000000L) + 2580132000000000L;
+        String cardno = "" + Math.abs(card);
+
+        long pin = (ran.nextLong() % 9000L) + 1000L;
+        String pinno = "" + Math.abs(pin);
+
+        String fac = null;
+        if(c1.isSelected()){
+            fac = fac + "ATM CARD";
+        } else if (c2.isSelected()) {
+            fac = fac + "Internet Banking";
+        } else if (c3.isSelected()) {
+            fac = fac + "Mobile Banking";
+        } else if (c4.isSelected()) {
+            fac = fac + "EMAIL Alerts";
+        } else if (c5.isSelected()) {
+            fac = fac + "Cheque Book";
+        } else if (c6.isSelected()) {
+            fac = fac + "E-Statement";
+        }
+
+        try{
+            if(e.getSource() == submit){
+                if(atype.isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Fill all the fields");
+                }else{
+                    Con1 con = new Con1();
+                    String q1 = "insert into signup3 values('"+formno+"', '"+atype+"', '"+cardno+"', '"+pinno+"', '"+fac+"')";
+                    String q2 = "insert into login values('"+formno+"', '"+cardno+"', '"+pinno+"')";
+                    con.statement.executeUpdate(q1);
+                    con.statement.executeUpdate(q2);
+                    JOptionPane.showMessageDialog(null, "Card Number : " + cardno + "\n Pin : " + pinno);
+                    setVisible(false);
+                    // TODO
+                }
+            } else if (e.getSource() == cancel) {
+                System.exit(0);
+            }
+
+
+        }catch (Exception E){
+            E.printStackTrace();
+        }
+
 
     }
 

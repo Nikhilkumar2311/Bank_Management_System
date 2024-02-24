@@ -21,35 +21,35 @@ public class Signup extends JFrame implements ActionListener {
         super("APPLICATION FORM");
 
         addScaledImageIcon("icon/bank.png", 25, 10, 100, 100);
-        createLabel("Application Form No." + first, "Raleway", Font.BOLD, 38, 160, 20, 600, 40);
-        createLabel("Page1 :-", "Raleway", Font.BOLD, 22, 330, 70, 600, 30);
-        createLabel("Personal Details", "Raleway", Font.BOLD, 22, 290, 90, 600, 30);
+        createLabel("Application Form No." + first, "Raleway", Font.BOLD, 30, 160, 20, 600, 40);
+        createLabel("Page1 :-", "Raleway", Font.BOLD, 22, 330, 60, 600, 30);
+        createLabel("Personal Details", "Raleway", Font.BOLD, 22, 290, 80, 600, 30);
 
-        textName = createTextField("Name :", 100, 150, 400, 30);
-        textFname = createTextField("Father's Name :", 100, 200, 400, 30);
+        textName = createTextField("Name :", 100, 140, 400, 30);
+        textFname = createTextField("Father's Name :", 100, 190, 400, 30);
 
-        createLabel("Date Of Birth :", "Raleway", Font.BOLD, 20, 100, 300, 200, 30);
+        createLabel("Date Of Birth :", "Raleway", Font.BOLD, 20, 100, 290, 200, 30);
         dateChooser = new JDateChooser();
         dateChooser.setForeground(new Color(105, 105, 105));
-        dateChooser.setBounds(300, 300, 400, 30);
+        dateChooser.setBounds(300, 290, 400, 30);
         add(dateChooser);
 
-        createLabel("Gender :", "Raleway", Font.BOLD, 20, 100, 250, 200, 30);
+        createLabel("Gender :", "Raleway", Font.BOLD, 20, 100, 240, 200, 30);
 
         r1 = new JRadioButton("Male");
         r1.setFont(new Font("Raleway", Font.BOLD, 14));
         r1.setBackground(new Color(222, 255, 228));
-        r1.setBounds(300, 250, 60, 30);
+        r1.setBounds(300, 240, 60, 30);
         add(r1);
 
         r2 = new JRadioButton("Female");
         r2.setFont(new Font("Raleway", Font.BOLD, 14));
         r2.setBackground(new Color(222, 255, 228));
-        r2.setBounds(420, 250, 90, 30);
+        r2.setBounds(420, 240, 90, 30);
         add(r2);
 
         r3 = new JRadioButton("Other");
-        r3.setBounds(550, 250, 150, 30);
+        r3.setBounds(550, 240, 150, 30);
         r3.setBackground(new Color(222, 255, 228));
         r3.setFont(new Font("Raleway", Font.BOLD, 14));
         add(r3);
@@ -59,18 +59,18 @@ public class Signup extends JFrame implements ActionListener {
         buttonGroup.add(r2);
         buttonGroup.add(r3);
 
-        textEmail = createTextField("Email :", 100, 350, 400, 30);
+        textEmail = createTextField("Email :", 100, 340, 400, 30);
 
-        createLabel("Marital Status :", "Raleway", Font.BOLD, 20, 100, 400, 200, 30);
+        createLabel("Marital Status :", "Raleway", Font.BOLD, 20, 100, 390, 200, 30);
 
         m1 = new JRadioButton("Married");
-        m1.setBounds(300, 400, 100, 30);
+        m1.setBounds(300, 390, 100, 30);
         m1.setBackground(new Color(222, 255, 228));
         m1.setFont(new Font("Raleway", Font.BOLD, 14));
         add(m1);
 
         m2 = new JRadioButton("Unmarried");
-        m2.setBounds(455, 400, 100, 30);
+        m2.setBounds(455, 390, 100, 30);
         m2.setBackground(new Color(222, 255, 228));
         m2.setFont(new Font("Raleway", Font.BOLD, 14));
         add(m2);
@@ -80,17 +80,17 @@ public class Signup extends JFrame implements ActionListener {
         buttonGroup2.add(m1);
         buttonGroup2.add(m2);
 
-        textAdd = createTextField("Address :", 100, 450, 400, 30);
-        textCity = createTextField("City :", 100, 500, 400, 30);
-        textState = createTextField("State :", 100, 550, 400, 30);
-        textPin = createTextField("PIN Code :", 100, 600, 400, 30);
+        textAdd = createTextField("Address :", 100, 440, 400, 30);
+        textCity = createTextField("City :", 100, 490, 400, 30);
+        textState = createTextField("State :", 100, 540, 400, 30);
+        textPin = createTextField("PIN Code :", 100, 590, 400, 30);
 
         button = new JButton("Next");
         button.setFont(new Font("Raleway", Font.BOLD, 14));
         button.setBackground(Color.BLACK);
         button.setForeground(Color.WHITE);
         button.addActionListener(this);
-        button.setBounds(620, 650, 80, 30);
+        button.setBounds(620, 630, 80, 30);
         add(button);
 
         getContentPane().setBackground(new Color(222, 255, 228));
@@ -157,9 +157,9 @@ public class Signup extends JFrame implements ActionListener {
             if(textName.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Fill all the Fields");
             }else{
-                Con1 con1 = new Con1();
+                Con1 con = new Con1();
                 String query = "insert into signup values('"+formno+"', '"+name+"', '"+fname+"', '"+dob+"', '"+gender+"', '"+email+"', '"+marital+"', '"+address+"', '"+city+"', '"+pincode+"', '"+state+"')";
-                con1.statement.executeUpdate(query);
+                con.statement.executeUpdate(query);
                 new Signup2(first);
                 setVisible(false);
             }

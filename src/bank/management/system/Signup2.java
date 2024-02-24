@@ -9,6 +9,7 @@ public class Signup2 extends JFrame implements ActionListener {
 
     JTextField textPan, textAadhar;
     String formno;
+    JComboBox religionComboBox, categoryComboBox, incomeComboBox, educationComboBox, occupationComboBox;
 
     JButton button;
 
@@ -30,31 +31,31 @@ public class Signup2 extends JFrame implements ActionListener {
 
         // Dropdown Which contains all the religion
         String[] religion = {"Hindu", "Muslim", "Sikh", "Christian", "Other"};
-        JComboBox religionComboBox = createComboBox(religion, 350, 120, 320, 30);
+        religionComboBox = createComboBox(religion, 350, 120, 320, 30);
 
 
         createLabel("Category :", "Raleway", Font.BOLD, 16, 100, 170, 100, 30);
 
         String[] category = {"GENERAL", "OBC", "SC", "ST", "Other"};
-        JComboBox categoryComboBox = createComboBox(category, 350, 170, 320, 30);
+        categoryComboBox = createComboBox(category, 350, 170, 320, 30);
 
 
         createLabel("Income :", "Raleway", Font.BOLD, 16, 100, 220, 100, 30);
 
         String[] income = {"None", "< 1,50,000", "< 2,50,000", "< 5,00,000", "Upto 10,00,000", "Above 10,00,000"};
-        JComboBox incomeComboBox = createComboBox(income, 350, 220, 320, 30);
+        incomeComboBox = createComboBox(income, 350, 220, 320, 30);
 
 
         createLabel("Education :", "Raleway", Font.BOLD, 16, 100, 270, 100, 30);
 
         String[] education = {"Non-Graduate", "Graduate", "Post-Graduate", "Doctrate", "Others"};
-        JComboBox educationComboBox = createComboBox(education, 350, 270, 320, 30);
+        educationComboBox = createComboBox(education, 350, 270, 320, 30);
 
 
         createLabel("Occupation :", "Raleway", Font.BOLD, 16, 100, 330, 100, 30);
 
         String[] occupation = {"Salaried", "Self-Employed", "Business", "Student", "Retired", "Other"};
-        JComboBox occupationComboBox = createComboBox(occupation, 350, 330, 320, 30);
+        occupationComboBox = createComboBox(occupation, 350, 330, 320, 30);
 
 
         createLabel("PAN No. :", "Raleway", Font.BOLD, 16, 100, 380, 100, 30);
@@ -112,7 +113,7 @@ public class Signup2 extends JFrame implements ActionListener {
         button.setBackground(Color.BLACK);
         button.setForeground(Color.WHITE);
         button.addActionListener(this);
-        button.setBounds(620, 580, 80, 30);
+        button.setBounds(620, 560, 80, 30);
         add(button);
 
 
@@ -161,6 +162,42 @@ public class Signup2 extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String rel = (String) religionComboBox.getSelectedItem();
+        String cate = (String) categoryComboBox.getSelectedItem();
+        String inc = (String) incomeComboBox.getSelectedItem();
+        String edu = (String) educationComboBox.getSelectedItem();
+        String occ = (String) occupationComboBox.getSelectedItem();
+
+        String pan = textPan.getText();
+        String aadhar = textAadhar.getText();
+
+        String scitizen = null;
+        if((r1.isSelected())){
+            scitizen = "Yes";
+        } else if (r2.isSelected()) {
+            scitizen = "No";
+        }
+
+        String eaccount = null;
+        if((e1.isSelected())){
+            eaccount = "Yes";
+        } else if (e2.isSelected()) {
+            eaccount = "No";
+        }
+
+        try{
+            if (textPan.getText().isEmpty() || textAadhar.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Fill all the fields");
+            }else{
+                Con1 con = new Con1();
+                String query = "insert into signup2 values('"+formno+"', '"+rel+"', '"+cate+"', '"+inc+"', '"+edu+"', '"+occ+"', '"+pan+"', '"+aadhar+"', '"+scitizen+"', '"+eaccount+"')";
+                con.statement.executeUpdate(query);
+                new Signup3(formno);
+                setVisible(false);
+            }
+        } catch (Exception E){
+            E.printStackTrace();
+        }
 
     }
 
