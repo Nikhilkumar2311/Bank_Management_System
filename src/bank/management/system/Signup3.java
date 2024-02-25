@@ -80,10 +80,10 @@ public class Signup3 extends JFrame implements ActionListener {
         c7.setBounds(100, 600, 600, 20);
         add(c7);
 
-        createLabel("Form No :- " + formno, "Raleway", Font.BOLD, 16, 700, 10, 180, 30);
+        createLabel("Form No :- " + formno, "Raleway", Font.BOLD, 14, 700, 10, 180, 30);
 
-        addButton("Submit", 220, 630, 100, 30, 1);
-        addButton("Cancel", 390, 630, 100, 30, 2);
+        submit = addButton("Submit", 220, 630, 100, 30);
+        cancel = addButton("Cancel", 390, 630, 100, 30);
 
 
         setLayout(null);
@@ -112,7 +112,7 @@ public class Signup3 extends JFrame implements ActionListener {
     }
 
 
-    private void addButton(String text, int x, int y, int width, int height, int buttonNumber) {
+    private JButton addButton(String text, int x, int y, int width, int height) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 14));
         button.setForeground(Color.WHITE);
@@ -120,20 +120,10 @@ public class Signup3 extends JFrame implements ActionListener {
         button.setBounds(x, y, width, height);
         button.addActionListener(this);
         add(button);
-
-        switch (buttonNumber) {
-            case 1:
-                submit = button;
-                break;
-            case 2:
-                cancel = button;
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid button number");
-        }
+        return button;
     }
 
-    private void addScaledImageIcon(String imagePath, int x, int y, int width, int height) {
+    public void addScaledImageIcon(String imagePath, int x, int y, int width, int height) {
         ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource(imagePath));
         Image scaledImage = icon.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
@@ -188,6 +178,7 @@ public class Signup3 extends JFrame implements ActionListener {
                     con.statement.executeUpdate(q1);
                     con.statement.executeUpdate(q2);
                     JOptionPane.showMessageDialog(null, "Card Number : " + cardno + "\n Pin : " + pinno);
+                    new Deposit(pinno);
                     setVisible(false);
                     // TODO
                 }

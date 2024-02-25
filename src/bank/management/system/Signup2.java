@@ -105,7 +105,7 @@ public class Signup2 extends JFrame implements ActionListener {
         buttonGroup1.add(e1);
         buttonGroup1.add(e2);
 
-        createLabel("Form No :- " + formno, "Raleway", Font.BOLD, 16, 700, 10, 180, 30);
+        createLabel("Form No :- " + formno, "Raleway", Font.BOLD, 14, 700, 10, 180, 30);
 
 
         button = new JButton("Next");

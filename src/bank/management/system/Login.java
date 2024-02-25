@@ -31,9 +31,9 @@ public class Login extends JFrame implements ActionListener {
         add(passwordField3);
 
 
-        addButton("SIGN IN", 300, 300, 100, 30, 1);
-        addButton("CLEAR", 430, 300, 100, 30, 2);
-        addButton("SIGN UP", 300, 350, 230, 30, 3);
+        button1 = addButton("SIGN IN", 300, 300, 100, 30);
+        button2 = addButton("CLEAR", 430, 300, 100, 30);
+        button3 = addButton("SIGN UP", 300, 350, 230, 30);
 
         addScaledImageIcon("icon/backbg.png", 0, 0, 850, 480);
 
@@ -61,7 +61,7 @@ public class Login extends JFrame implements ActionListener {
         return label;
     }
 
-    private void addButton(String text, int x, int y, int width, int height, int buttonNumber) {
+    private JButton addButton(String text, int x, int y, int width, int height) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 14));
         button.setForeground(Color.WHITE);
@@ -69,20 +69,7 @@ public class Login extends JFrame implements ActionListener {
         button.setBounds(x, y, width, height);
         button.addActionListener(this);
         add(button);
-
-        switch (buttonNumber) {
-            case 1:
-                button1 = button;
-                break;
-            case 2:
-                button2 = button;
-                break;
-            case 3:
-                button3 = button;
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid button number");
-        }
+        return button;
     }
 
     // To add the action on button we implemented the ActionListener
@@ -91,14 +78,15 @@ public class Login extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try{
             if (e.getSource() == button1){
-
+                // TODO
             }
             else if (e.getSource() == button2) {
                 textField2.setText("");
                 passwordField3.setText("");
             }
             else if (e.getSource() == button3) {
-
+                new Signup();
+                setVisible(false);
             }
 
         } catch (Exception E){
