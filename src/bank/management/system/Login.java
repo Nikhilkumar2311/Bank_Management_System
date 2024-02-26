@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 public class Login extends JFrame implements ActionListener {
     JTextField textField2;
@@ -72,13 +73,21 @@ public class Login extends JFrame implements ActionListener {
         return button;
     }
 
-    // To add the action on button we implemented the ActionListener
-    // here e will tell which button is clicked
     @Override
     public void actionPerformed(ActionEvent e) {
         try{
             if (e.getSource() == button1){
-                // TODO
+                Con1 con = new Con1();
+                String cardno = textField2.getText();
+                String pin = passwordField3.getText();
+                String query = "Select * from login where card_number = '"+cardno+"' and pin = '"+pin+"'";
+                ResultSet resultSet = con.statement.executeQuery(query);
+                if (resultSet.next()){
+                    setVisible(false);
+                    new Transaction(pin);
+                }else {
+                    JOptionPane.showMessageDialog(null,"Incorrect Card Number or PIN");
+                }
             }
             else if (e.getSource() == button2) {
                 textField2.setText("");

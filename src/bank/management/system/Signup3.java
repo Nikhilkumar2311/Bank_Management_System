@@ -146,7 +146,7 @@ public class Signup3 extends JFrame implements ActionListener {
         }
 
         Random ran = new Random();
-        long card = (ran.nextLong() % 90000000L) + 2580132000000000L;
+        long card = (ran.nextLong() % 90000000L) + 1409962000000000L;
         String cardno = "" + Math.abs(card);
 
         long pin = (ran.nextLong() % 9000L) + 1000L;

@@ -4,20 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
 
-public class Deposit extends JFrame implements ActionListener {
+public class Transaction extends JFrame implements ActionListener {
 
     JLabel label, l1;
-    JTextField textField1;
-
-    JButton b1, b2;
-
+    JButton b1,b2,b3,b4,b5,b6,b7;
     String pin;
-    Deposit(String pin){
-        super("ATM");
 
+    Transaction(String pin){
+        super("Main");
         this.pin = pin;
+
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/atm2.png"));
         Image i2 = i1.getImage().getScaledInstance(1350, 830, Image.SCALE_DEFAULT);
@@ -26,19 +23,33 @@ public class Deposit extends JFrame implements ActionListener {
         label.setBounds(0,0,1350,830);
         add(label);
 
-
-        l1 = createLabel("ENTER AMOUNT YOU WANT TO DEPOSIT", "System", Font.BOLD, 16, 390, 180, 400, 35);
+        l1 = createLabel("Please Select Your Transaction", "System", Font.BOLD, 24, 370, 180, 400, 35);
         l1.setForeground(new Color(255,255,255));
         label.add(l1);
 
-        textField1 = createTextField( 390, 230, 320, 25);
-        label.add(textField1);
-
-        b1 = addButton("DEPOSIT", 630, 362, 100, 35);
+        b1 = addButton("DEPOSIT", 360, 272, 120, 32);
         label.add(b1);
 
-        b2 = addButton("BACK", 630, 406, 100, 35);
+        b2 = addButton("CASH WITHDRAW", 560, 272, 180, 32);
         label.add(b2);
+
+        b3 = addButton("FAST CASH", 360, 318, 120, 32);
+        label.add(b3);
+
+        b4 = addButton("MINI STATEMENT", 560, 318, 180, 32);
+        label.add(b4);
+
+        b5 = addButton("PIN CHANGE", 360, 364, 120, 32);
+        label.add(b5);
+
+        b6 = addButton("BALANCE ENQUIRY", 560, 364, 180, 32);
+        label.add(b6);
+
+        b7 = addButton("EXIT", 560, 406, 180, 32);
+        label.add(b7);
+
+
+
 
 
         setLayout(null);
@@ -46,14 +57,6 @@ public class Deposit extends JFrame implements ActionListener {
         setLocation(0, 0);
         setVisible(true);
     }
-
-    private JTextField createTextField(int x, int y, int width, int height) {
-        JTextField textField = new JTextField();
-        textField.setFont(new Font("Raleway", Font.BOLD, 22));
-        textField.setBounds(x, y, width, height);
-        return textField;
-    }
-
 
     private JLabel createLabel(String text, String fontName, int fontStyle, int fontSize, int x, int y, int width, int height) {
         JLabel label = new JLabel(text);
@@ -73,33 +76,21 @@ public class Deposit extends JFrame implements ActionListener {
         return button;
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         try{
-            String amount = textField1.getText();
-            Date date = new Date();
             if(e.getSource() == b1){
-                if(textField1.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Please enter the Amount you want to Deposit");
-                }else{
-                    Con1 con = new Con1();
-                    con.statement.executeUpdate("insert into bank values('"+pin+"', '"+date+"', 'Deposit', '"+amount+"')");
-                    JOptionPane.showMessageDialog(null, "Rs. " + amount + " Deposited Successfully");
-                    setVisible(false);
-                    new Transaction(pin);
-                }
-            } else if (e.getSource() == b2) {
+                new Deposit(pin);
                 setVisible(false);
-                new Transaction(pin);
+            } else if (e.getSource() == b7) {
+                System.exit(0);
             }
-
         }catch (Exception E){
             E.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        new Deposit("");
+        new Transaction("");
     }
 }
