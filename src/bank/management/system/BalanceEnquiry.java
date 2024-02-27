@@ -4,17 +4,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
-public class Transaction extends JFrame implements ActionListener {
+public class BalanceEnquiry extends JFrame implements ActionListener {
 
-    JLabel label, l1;
-    JButton b1,b2,b3,b4,b5,b6,b7;
+    JLabel label, l1, l2;
+
+    JButton b1;
+
     String pin;
 
-    Transaction(String pin){
-        super("Main");
-        this.pin = pin;
+    BalanceEnquiry(String pin){
+        super("ATM");
 
+        this.pin = pin;
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/atm2.png"));
         Image i2 = i1.getImage().getScaledInstance(1350, 830, Image.SCALE_DEFAULT);
@@ -23,32 +26,34 @@ public class Transaction extends JFrame implements ActionListener {
         label.setBounds(0,0,1350,830);
         add(label);
 
-        l1 = createLabel("Please Select Your Transaction", "System", Font.BOLD, 24, 370, 180, 400, 35);
+
+        l1 = createLabel("YOUR CURRENT BALANCE IS Rs. ", "System", Font.BOLD, 16, 390, 180, 400, 35);
         l1.setForeground(new Color(255,255,255));
         label.add(l1);
 
-        b1 = addButton("DEPOSIT", 360, 272, 120, 32);
+        l2 = createLabel("", "System", Font.BOLD, 16, 390, 220, 400, 35);
+        l2.setForeground(new Color(255,255,255));
+        label.add(l2);
+
+        b1 = addButton("BACK", 620, 406, 120, 35);
         label.add(b1);
 
-        b2 = addButton("CASH WITHDRAW", 560, 272, 180, 32);
-        label.add(b2);
+        int balance = 0;
+        try{
+            Con1 con = new Con1();
+            ResultSet resultSet = con.statement.executeQuery("Select * from bank where pin = '"+pin+"'");
+            while (resultSet.next()){
+                if(resultSet.getString("type").equals("Deposit")){
+                    balance += Integer.parseInt(resultSet.getString("amount"));
+                }else {
+                    balance -= Integer.parseInt(resultSet.getString("amount"));
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-        b3 = addButton("FAST CASH", 360, 318, 120, 32);
-        label.add(b3);
-
-        b4 = addButton("MINI STATEMENT", 560, 318, 180, 32);
-        label.add(b4);
-
-        b5 = addButton("PIN CHANGE", 360, 364, 120, 32);
-        label.add(b5);
-
-        b6 = addButton("BALANCE ENQUIRY", 560, 364, 180, 32);
-        label.add(b6);
-
-        b7 = addButton("EXIT", 560, 406, 180, 32);
-        label.add(b7);
-
-
+        l2.setText("" + balance);
 
 
 
@@ -57,6 +62,7 @@ public class Transaction extends JFrame implements ActionListener {
         setLocation(0, 0);
         setVisible(true);
     }
+
 
     private JLabel createLabel(String text, String fontName, int fontStyle, int fontSize, int x, int y, int width, int height) {
         JLabel label = new JLabel(text);
@@ -78,25 +84,11 @@ public class Transaction extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try{
-            if(e.getSource() == b1){
-                new Deposit(pin);
-                setVisible(false);
-            } else if (e.getSource() == b2) {
-                new Withdrawal(pin);
-                setVisible(false);
-            } else if (e.getSource() == b6) {
-                new BalanceEnquiry(pin);
-                setVisible(false);
-            } else if (e.getSource() == b7) {
-                System.exit(0);
-            }
-        }catch (Exception E){
-            E.printStackTrace();
-        }
+        setVisible(false);
+        new Transaction(pin);
     }
 
     public static void main(String[] args) {
-        new Transaction("");
+        new BalanceEnquiry("");
     }
 }
