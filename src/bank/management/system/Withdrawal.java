@@ -90,15 +90,15 @@ public class Withdrawal extends JFrame implements ActionListener {
                 }else{
                     Con1 con = new Con1();
                     ResultSet resultSet = con.statement.executeQuery("select * from bank where pin = '"+pin+"'");
-                    int balance = 0;
+                    long balance = 0L;
                     while (resultSet.next()){
                         if(resultSet.getString("type").equals("Deposit")){
-                            balance += Integer.parseInt(resultSet.getString("amount"));
+                            balance += Long.parseLong(resultSet.getString("amount"));
                         }else {
-                            balance -= Integer.parseInt(resultSet.getString("amount"));
+                            balance -= Long.parseLong(resultSet.getString("amount"));
                         }
                     }
-                    if(balance < Integer.parseInt(amount)){
+                    if(balance < Long.parseLong(amount)){
                         JOptionPane.showMessageDialog(null, "Insufficient Balance");
                         return;
                     }

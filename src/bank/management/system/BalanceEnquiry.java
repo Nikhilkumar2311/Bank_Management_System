@@ -38,15 +38,15 @@ public class BalanceEnquiry extends JFrame implements ActionListener {
         b1 = addButton("BACK", 620, 406, 120, 35);
         label.add(b1);
 
-        int balance = 0;
+        long balance = 0L;
         try{
             Con1 con = new Con1();
             ResultSet resultSet = con.statement.executeQuery("Select * from bank where pin = '"+pin+"'");
             while (resultSet.next()){
                 if(resultSet.getString("type").equals("Deposit")){
-                    balance += Integer.parseInt(resultSet.getString("amount"));
+                    balance += Long.parseLong(resultSet.getString("amount"));
                 }else {
-                    balance -= Integer.parseInt(resultSet.getString("amount"));
+                    balance -= Long.parseLong(resultSet.getString("amount"));
                 }
             }
         }catch (Exception e){
