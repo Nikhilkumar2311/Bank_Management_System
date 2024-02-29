@@ -49,9 +49,6 @@ public class Transaction extends JFrame implements ActionListener {
         label.add(b7);
 
 
-
-
-
         setLayout(null);
         setSize(1920, 1080);
         setLocation(0, 0);
@@ -84,6 +81,9 @@ public class Transaction extends JFrame implements ActionListener {
                 setVisible(false);
             } else if (e.getSource() == b2) {
                 new Withdrawal(pin);
+                setVisible(false);
+            } else if (e.getSource() == b3) {
+                new FastCash(pin);
                 setVisible(false);
             } else if (e.getSource() == b6) {
                 new BalanceEnquiry(pin);
