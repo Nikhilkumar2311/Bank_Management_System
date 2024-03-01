@@ -19,7 +19,7 @@ public class Mini extends JFrame implements ActionListener {
         setUndecorated(true);
         setLayout(null);
 
-        JLabel l1 = createLabel(20, 20, 400, 200);
+        JLabel l1 = createLabel(20, 140, 400, 200);
 
         JLabel l2 = new JLabel("Bank");
         l2.setFont(new Font("System", Font.BOLD, 15));
