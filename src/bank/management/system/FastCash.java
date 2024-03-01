@@ -52,6 +52,7 @@ public class FastCash extends JFrame implements ActionListener {
         setLayout(null);
         setSize(1920, 1080);
         setLocation(0, 0);
+        setUndecorated(true);
         setVisible(true);
 
     }
@@ -92,7 +93,7 @@ public class FastCash extends JFrame implements ActionListener {
                     }else{
                         balance -= Long.parseLong(resultSet.getString("amount"));
                     }
-                }String num = "17";
+                }
 
                 if (e.getSource() != b7 && balance < Long.parseLong(amount)){
                     JOptionPane.showMessageDialog(null, "Insufficient Balance");

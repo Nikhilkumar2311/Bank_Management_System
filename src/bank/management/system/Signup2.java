@@ -120,6 +120,7 @@ public class Signup2 extends JFrame implements ActionListener {
         setLayout(null);
         setSize(850, 800);
         setLocation(360, 40);
+        setUndecorated(true);
         getContentPane().setBackground(new Color(252, 208, 76));
         setVisible(true);
     }
